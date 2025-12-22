@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/wiki.css">
+    <title>Wiki | LaxaCube</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../logo.png" alt="Logo du serveur">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../index.html#rejnnoindre">Rejoindre</a></li>
+                <li><a href="./wiki.html">Wiki</a></li>
+                <!-- <li><a href="./images.html">Galerie</a></li> -->
+                <li><a href="https://laxacube.craftingstore.net/" class="ext" target="_self">Boutique</a></li>
+                <li><a href="https://bit.ly/discord-laxacube" class="ext" target="_self">Communauté</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Première Table avec filtres -->
+        <h2>Liste des Commandes</h2>
+        <input type="text" id="search1" placeholder="Rechercher..." class="search">
+        
+        <!-- Filtres -->
+        <select id="rank-filter1">
+            <option value="">Tous les ranks</option>
+        </select>
+        <select id="category-filter1">
+            <option value="">Toutes les catégories</option>
+        </select>
+
+        <table>
+            <thead><tr id="table-head1"></tr></thead>
+            <tbody id="table-body1"></tbody>
+        </table>
+        <button id="load-more1" class="btn">Afficher plus</button>
+
+        <!-- Deuxième Table sans filtres -->
+        <h2>Ouils et spawners</h2>
+        <input type="text" id="search2" placeholder="Rechercher..." class="search">
+        <table>
+            <thead><tr id="table-head2"></tr></thead>
+            <tbody id="table-body2"></tbody>
+        </table>
+        <button id="load-more2" class="btn">Afficher plus</button>
+    </main>
+
+    <footer>
+        <nav>
+            <img src="../logo.png" alt="logo">
+            <ul>
+                <li><a href="./status.html">Status des services</a></li>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">A propos</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2025 LaxaCube. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function loadCSV(csvFile, tableId, hasFilters = false) {
+            let rowsData = [];
+            let filteredRows = [];
+            let currentRowIndex = 0;
+
+            fetch(csvFile)
+                .then(response => response.text())
+                .then(csvText => {
+                    const rows = csvText.trim().split("\n");
+                    const headers = rows.shift().split(",");
+                    const tableHead = document.getElementById("table-head" + tableId);
+                    
+                    headers.forEach(header => {
+                        const th = document.createElement("th");
+                        th.textContent = header;
+                        tableHead.appendChild(th);
+                    });
+
+                    rows.forEach(row => {
+                        const values = row.split(",");
+                        rowsData.push(values);
+                    });
+
+                    if (hasFilters) {
+                        generateFilters(rowsData, tableId);
+                    }
+
+                    filterTable();
+                })
+                .catch(error => console.error(`Erreur de chargement du CSV ${csvFile} :`, error));
+
+            document.getElementById("search" + tableId).addEventListener("input", filterTable);
+            document.getElementById("load-more" + tableId).addEventListener("click", loadMoreRows);
+            if (hasFilters) {
+                document.getElementById("rank-filter" + tableId).addEventListener("change", filterTable);
+                document.getElementById("category-filter" + tableId).addEventListener("change", filterTable);
+            }
+
+            function generateFilters(rowsData, tableId) {
+                const rankSet = new Set();
+                const categorySet = new Set();
+
+                rowsData.forEach(row => {
+                    if (row[3]) rankSet.add(row[3]); // Rank colonne 3
+                    if (row[2]) categorySet.add(row[2]); // Catégorie colonne 2
+                });
+
+                updateSelectOptions("rank-filter" + tableId, rankSet);
+                updateSelectOptions("category-filter" + tableId, categorySet);
+            }
+
+            function updateSelectOptions(id, valuesSet) {
+                const select = document.getElementById(id);
+                select.innerHTML = '<option value="">Tous</option>'; // Reset pour éviter duplication
+                [...valuesSet].sort().forEach(value => { // Trie alphabétique
+                    const option = document.createElement("option");
+                    option.value = value;
+                    option.textContent = value;
+                    select.appendChild(option);
+                });
+            }
+
+            function filterTable() {
+                const searchQuery = document.getElementById("search" + tableId).value.toLowerCase();
+                const selectedRank = document.getElementById("rank-filter" + tableId)?.value || '';
+                const selectedCategory = document.getElementById("category-filter" + tableId)?.value || '';
+
+                filteredRows = rowsData.filter(values => {
+                    const rowString = values.join(" ").toLowerCase();
+                    const matchSearch = rowString.includes(searchQuery);
+                    const matchRank = selectedRank === "" || values[3] === selectedRank;  // Rank est en colonne 3
+                    const matchCategory = selectedCategory === "" || values[2] === selectedCategory; // Catégorie en colonne 2
+                    return matchSearch && matchRank && matchCategory;
+                });
+
+                currentRowIndex = 0;
+                document.getElementById("table-body" + tableId).innerHTML = "";
+                displayRows();
+            }
+
+            function displayRows() {
+                const tableBody = document.getElementById("table-body" + tableId);
+                const rowsToDisplay = filteredRows.slice(currentRowIndex, currentRowIndex + 10);
+
+                rowsToDisplay.forEach(values => {
+                    const tr = document.createElement("tr");
+                    values.forEach((value, index) => {
+                        const td = document.createElement("td");
+
+                        // Vérifier si la dernière colonne contient un lien d'image
+                        if (tableId === "2" && index === values.length - 1 && value) {
+                            const img = document.createElement("img");
+                            img.src = value;
+                            img.alt = "Image de présentation";
+                            img.style.maxWidth = "100%";  // Limiter la taille de l'image si nécessaire
+                            td.appendChild(img);
+                        } else {
+                            td.textContent = value;
+                        }
+                        
+
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
+
+                currentRowIndex += 10;
+                document.getElementById("load-more" + tableId).style.display =
+                    currentRowIndex >= filteredRows.length ? "none" : "block";
+            }
+
+            function loadMoreRows() {
+                displayRows();
+            }
+        }
+
+        // Charger les deux CSV indépendamment
+        loadCSV("commande.csv", "1", true); // Première table avec filtres
+        loadCSV("ajout.csv", "2", false); // Deuxième table sans filtres
+    </script>
+</body>
+</html>

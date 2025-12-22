@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status des Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .monitor {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .up { background: #d4edda; color: #155724; }
+        .down { background: #f8d7da; color: #721c24; }
+        .unknown { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Statut des Services</h2>
+        <div id="monitors"></div>
+    </div>
+
+    <script>
+        const API_KEY = "ur2283919-a9da759538ec11bd279ff1a6";
+        const URL = "https://api.uptimerobot.com/v2/getMonitors";
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1333146200639144038/wnDDaSlWU9nTH1tAJxqAXqqpgA6M6q4uXMKDxHUWxVYoyVK-UoSf2bvkRxbGDTx8pFE9";
+        const ROLE_ID = "1287343256920784936";
+
+        let previousStatus = {}; // Stocke l'état précédent de chaque serveur
+
+        async function fetchMonitors() {
+            try {
+                const response = await fetch(URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `api_key=${API_KEY}&format=json`
+                });
+
+                const data = await response.json();
+                if (!data.monitors) return;
+
+                updateMonitors(data.monitors);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des statuts :", error);
+            }
+        }
+
+        function updateMonitors(monitors) {
+            const container = document.getElementById("monitors");
+            container.innerHTML = "";
+
+            monitors.forEach(monitor => {
+                let statusClass = monitor.status === 2 ? "up" : monitor.status === 9 ? "down" : "unknown";
+                let statusText = monitor.status === 2 ? "✅ En ligne" : monitor.status === 9 ? "❌ Hors ligne" : "⚠️ Inconnu";
+
+                // Vérifier si le statut a changé depuis la dernière vérification
+                if (previousStatus[monitor.id] !== undefined && previousStatus[monitor.id] !== monitor.status) {
+                    if (monitor.status === 9) sendWebhookAlert(monitor);
+                    else if (monitor.status === 2) sendWebhookRecovery(monitor);
+                }
+
+                // Mise à jour du statut actuel
+                previousStatus[monitor.id] = monitor.status;
+
+                // Affichage dans la page
+                const div = document.createElement("div");
+                div.className = `monitor ${statusClass}`;
+                div.innerHTML = `<strong>${monitor.friendly_name}</strong> <span>${statusText}</span>`;
+
+                container.appendChild(div);
+            });
+        }
+
+        function sendWebhookAlert(monitor) {
+            const payload = {
+                content: `<@&${ROLE_ID}> 🚨 **Alerte DOWN** 🚨`,
+                embeds: [{
+                    title: "🔴 Serveur Hors Ligne",
+                    description: `Le serveur **${monitor.friendly_name}** est actuellement **hors ligne** ❌.\nLe staff s'en occupe !`,
+                    color: 15158332, // Rouge
+                    timestamp: new Date(),
+                    footer: { text: "Monitoring - UptimeRobot" }
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            }).catch(error => console.error("Erreur envoi webhook:", error));
+        }
+
+        function sendWebhookRecovery(monitor) {
+            const payload = {
+                content: `<@&${ROLE_ID}> ✅ **Service Rétabli** ✅`,
+                embeds: [{
+                    title: "🟢 Serveur en Ligne",
+                    description: `Le serveur **${monitor.friendly_name}** est de retour en ligne ! 🎉`,
+                    color: 3066993, // Vert
+                    timestamp: new Date(),
+                    footer: { text: "Monitoring - UptimeRobot" }
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            }).catch(error => console.error("Erreur envoi webhook:", error));
+        }
+
+        // 🔥 Lancer la surveillance 
+        fetchMonitors();
+        setInterval(fetchMonitors, 60000); // Vérifier toutes les 60 secondes
+
+    </script>
+
+</body>
+</html>

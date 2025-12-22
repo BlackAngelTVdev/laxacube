@@ -1,0 +1,84 @@
+﻿Nom,description,categorie,rank,exemple
+spawn,Permet d’aller au spawn.,utility,defaut,/spawn
+sethome,Permet de définir un home.,tp,defaut,/sethome <HomeName>
+home,Permet de définir un home pour cette téléportation.,tp,defaut,/home <HomeName>
+delhome,Permet de supprimer un home.,tp,defaut,/delhome <HomeName>
+homes ,Permet de voir vos homes.,tp,defaut,/homes
+tpa,Demande de téléportation vers le joueur spécifié.,tp,defaut,/tpa <player>
+tpaccept,Accepte les demandes de téléportation.,tp,defaut,/tpaccept
+tpdeny,Rejette les demandes de téléportation.,tp,defaut,/tpdeny
+ATTENTION,"Certaines commandes dans la catégorie ""faction"" ne fonctionnent pas ou n'ont pas le même nom ! Si tu en trouves contacte le support.",faction,defaut
+faction join,Rejoindre une faction définie.,faction,defaut,/f join <faction>
+faction leave,Quitter ta faction.,faction,defaut,/f leave
+faction chat,"Active ou désactive les modes de chat ou spécifie quel canal tu veux utiliser.",faction,defaut,/f chat <mode>
+faction toogle chat,Active ou désactive l’ignorance du chat d’alliance.,faction,defaut,/f togglealliancechat
+faction home,Te téléporte vers le home de ta faction.,faction,defaut,/f home
+faction create,Crée une faction avec le nom donné.,faction,defaut,/f create <name>
+faction disband,Dissout ta faction.,faction,defaut,/f disband
+faction tag,Change le tag de ta faction.,faction,defaut,/f tag <tag>
+faction desc,Définit la nouvelle description de ta faction.,faction,defaut,/f desc <description...>
+faction sethome,Définit le home de ta faction.,faction,defaut,/f sethome
+faction delhome,Supprime le home de ta faction.,faction,defaut,/f delhome <name>
+faction announce,Crée une annonce envoyée à tous les membres de la faction.,faction,defaut,/f announce <message...>
+faction perms,Gère les permissions de ta faction.,faction,defaut,/f perms
+faction defaultrole,Définit le rôle par défaut pour les nouveaux membres de ta faction.,faction,defaut,/f defaultrole <role>
+faction open,Active ou désactive la possibilité pour n'importe qui de rejoindre la faction.,faction,defaut,/f open
+faction invite,Invite un joueur dans ta faction.,faction,defaut,/f invite <target>
+faction deinvite,Révoque une invitation à un joueur.,faction,defaut,/f deinvite <target>
+faction list,Affiche la liste des membres.,faction,defaut,/f list
+faction title,Définit un titre personnalisé pour un joueur.,faction,defaut,/f title <player> [title]
+faction promote,Promeut un joueur d'un rang.,faction,defaut,/f promote <name>
+faction demote,Rétrograde un joueur d'un rang.,faction,defaut,/f demote <name>
+faction mod,Promeut un joueur dans ta faction au rang de modérateur.,faction,defaut,/f mod [name]
+faction coleader,Promeut un joueur dans ta faction au rang de co-leader.,faction,defaut,/f coleader [name]
+faction admin,Définit le nouveau leader de ta faction.,faction,defaut,/f admin <player>
+faction kick,Expulse un joueur de la faction.,faction,defaut,/f kick <target>
+faction ban,Bannis un joueur de la faction.,faction,defaut,/f ban <target>
+faction unabn,Dé-bannis un joueur de la faction.,faction,defaut,/f unban <target>
+faction banlist,Affiche la liste des joueurs actuellement bannis de la faction.,faction,defaut,/f banlist
+faction claim,"Par défaut : rayon = 1 faction = la tienne. Prend un ou plusieurs chunks pour la faction donnée.",faction,defaut,/f claim [radius] [faction]
+faction unclaim,"Par défaut : rayon = 1 faction = la tienne. Retourne un ou plusieurs chunks du territoire de la faction à la nature sauvage.",faction,defaut,/f unclaim [radius] [faction]
+faction autoclaim,Par défaut : faction = la tienne. Active ou désactive le autoclaim.,faction,defaut,/f autoclaim [faction]
+faction autounclaim,Par défaut : faction = la tienne. Active ou désactive le autounclaim.,faction,defaut,/f autounclaim [faction]
+faction claimat,Tente de revendiquer un chunk dans le monde donné aux coordonnées spécifiées.,faction,defaut,/f claimat <world> <x> <z>
+faction claimfill,"Par défaut : montant = limite de la config faction = la tienne. Tente de revendiquer un nombre de blocs pour remplir une forme de revendications établie.",faction,defaut,/f claimfill [amount] [faction]
+faction unclaimfill,"Par défaut : montant = limite de la config faction = la tienne. Tente de dé-revendiquer toutes les revendications liées à la revendication actuelle.",faction,defaut,/f unclaimfill [amount] [faction]
+faction claimline,"Par défaut : montant = 1 direction = face faction = la tienne. Tente de revendiquer un certain nombre de blocs en ligne selon la direction donnée.",faction,defaut,/f claimline [amount] [direction] [faction]
+faction unclaimall,L'option nucléaire. Supprime toutes les revendications de ta faction et les retourne à la nature sauvage.,faction,defaut,/f unclaimall
+faction safeunclaimall,Par défaut : monde = tous. Supprime toutes les revendications de zone de sécurité dans un monde donné.,faction,defaut,/f safeunclaimall [world]
+faction listclaim,"Par défaut : monde = actuel faction = actuelle. Liste toutes les coordonnées des revendications de la faction.",faction,defaut,/f listclaims [world] [faction]
+faction money,Affiche l'aide pour les commandes liées à l'argent.,faction,defaut,/f money
+faction money balance,Vérifie le solde d'une faction.,faction,defaut,/f money balance
+faction money deposit,Dépose de l'argent dans ta faction.,faction,defaut,/f money deposit <amount> [faction]
+faction money ff,Transfère de l'argent d'une faction à une autre.,faction,defaut,/f money ff <amount> <factionfrom> <factionto>
+faction money fp,Transfère de l'argent d'une faction à un joueur.,faction,defaut,/f money fp <amount> <factionfrom> <playerto>
+faction money pf,Transfère de l'argent d'un joueur à une faction.,faction,defaut,/f money pf <amount> <playerfrom> <factionto>
+faction money withdraw ,Retire de l'argent de ta faction.,faction,defaut,/f money withdraw <amount> [faction]
+faction money modify,Modifie le compte bancaire de ta faction.,faction,defaut,/f money modify <amount> <faction>
+faction  tnt,Affiche la banque TNT de ta faction.,faction,defaut,/f tnt
+faction tnt deposit,Dépose dans la banque TNT de la faction.,faction,defaut,/f tnt deposit <amount>
+faction tnt fill,Remplis les distributeurs à proximité avec de la TNT de la banque TNT de la faction.,faction,defaut,/f tnt fill <radius> <amount>
+faction tnt info,Affiche la banque TNT de la faction.,faction,defaut,/f tnt info
+faction tnt siphon,Siphonne de la TNT des distributeurs à proximité vers la banque TNT de la faction.,faction,defaut,/f tnt siphon <radius> [amount]
+faction tnt withdraw ,Retire de la banque TNT de la faction.,faction,defaut,/f tnt withdraw <amount>
+shop,Ouvre la boutique.,shop,defaut,/shop
+sellall,Vends tous les objets de ton inventaire.,shop,defaut,/sellall
+sellall meterial,Vends tous les objets de ton inventaire qui correspondent au type spécifié.,shop,defaut,/sellall <material>
+sellall hand,Vends la pile d'objets que tu tiens actuellement en main.,shop,defaut,/sellall hand
+sellgui,Ouvre la boutique GUI.,shop,defaut,/sellgui
+Ah,Ouvre l'hôtel des ventes (AH).,ah,defaut,/ah
+Sell tiem,Vends un objet.,ah,defaut,/pa sell <price>
+cancel item,Annule la vente de tes objets en enchères.,ah,defaut,/pa cancel
+collect items,Récupère les objets expirés.,ah,defaut,"/pa collect"
+pay,Paye un autre joueur à partir de ton solde.,money,defaut,/pay <player> <amount>
+money,Affiche le solde actuel d'un joueur.,money,defaut,/money
+balancetop,Liste les joueurs avec les meilleurs soldes.,money,defaut,/balancetop
+afk,Marque que tu es absent(e) du clavier.,utility,defaut,/afk [message
+quest,Ouvre les quêtes GUI.,utility,defaut,/quest
+feed,Satisfait la faim.,utility,Iron/Gold/Diamond,/feed
+enderchest,Ouvre l'enderchest du joueur exécutant la commande.,utility,Iron/Gold/Diamond,/ec
+workbench,Ouvre une table de travail (crafting).,utility,Iron/Gold/Diamond,/craft
+back,Te téléporte à ton emplacement avant de mourir.,utility,Diamond,/back
+carte,Ouvre la carte des serveur.,tp,defaut,/carte
+clearinfo,Marque le temps avant le prochain clearLagg.,utility,default,/clearinfo
+furnace,Quit l'item dans votre main.,utility,Iron/Gold/Diamond,/furnace

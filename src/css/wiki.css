@@ -1,0 +1,44 @@
+/* Tableau */
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* Ajoute cette ligne pour une taille fixe des colonnes */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word; /* Empêche que le texte déborde dans les cellules */
+}
+
+th {
+    background-color: #a100ff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+.btn{
+    color: white; 
+    background-color: #a100ff;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 15px;
+}
+.sertch{
+    height: 30px;
+    padding: 5px;
+    width: 100%;
+    padding: 0;
+    border: 0;
+}
