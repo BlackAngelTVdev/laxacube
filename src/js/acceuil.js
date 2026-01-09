@@ -37,6 +37,43 @@ async function fetchPlayerCount() {
     }
 }
 
+async function setLatestRelease() {
+    const userAgent = window.navigator.userAgent;
+    const linkElement = document.getElementById('download-link');
+    
+    const apiUrl = "https://api.github.com/repos/BlackAngelTVdev/LaxaCube-Launcher/releases/latest";
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        
+        let downloadUrl = data.html_url; 
+
+        if (userAgent.indexOf("Win") !== -1) {
+
+            const asset = data.assets.find(a => a.name.endsWith('.exe'));
+            if (asset) downloadUrl = asset.browser_download_url;
+        } 
+        else if (userAgent.indexOf("Mac") !== -1) {
+
+            const asset = data.assets.find(a => a.name.endsWith('.dmg'));
+            if (asset) downloadUrl = asset.browser_download_url;
+        } 
+        else if (userAgent.indexOf("Linux") !== -1) {
+
+            const asset = data.assets.find(a => a.name.endsWith('.AppImage'));
+            if (asset) downloadUrl = asset.browser_download_url;
+        }
+
+        linkElement.href = downloadUrl;
+    } catch (error) {
+        console.error("Erreur lors de la récupération de la release GitHub:", error);
+    }
+}
+
+
+setLatestRelease();
+
 // Mettre à jour toutes les 30 secondes
 fetchPlayerCount();
 setInterval(fetchPlayerCount, 30000);
