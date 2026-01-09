@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-const serverIP = "mango.fps.ms"; // Remplace par l'IP ou le domaine de ton serveur
-const serverPort = 26246; // Par défaut, c'est 25565
+const serverIP = "laxacube.ch"; // Remplace par l'IP ou le domaine de ton serveur
+const serverPort = 25565; // Par défaut, c'est 25565
 
 async function fetchPlayerCount() {
     try {
