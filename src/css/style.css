@@ -79,6 +79,85 @@ footer nav{
 footer nav ul li a{
     text-decoration: underline;
 }
+
+/* Style du bouton flottant */
+#chat-launcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #a100ff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: transform 0.2s ease;
+}
+
+#chat-launcher:hover {
+    transform: scale(1.1);
+}
+
+#chat-launcher img {
+    width: 35px;
+}
+
+/* Container de la fenêtre */
+#chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: #1a1a1a; /* Couleur sombre pro */
+    border-radius: 15px;
+    overflow: hidden;
+    display: none; /* Caché par défaut */
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 1000;
+    border: 1px solid #333;
+}
+
+/* Header de la fenêtre */
+#chat-header {
+    background: #a100ff;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+#chat-header button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* L'iframe en elle-même */
+#chat-container iframe {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 480px) {
+    #chat-container {
+        width: 90%;
+        height: 70%;
+        right: 5%;
+    }
+}
+
 @media (max-width: 480px) {
     nav ul {
         flex-direction: column;

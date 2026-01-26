@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/style.css">
     <title>Galerie | LaxaCube</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -16,8 +18,9 @@
                 <li><a href="../index.html">Accueil</a></li>
                 <li><a href="./wiki.html">Wiki</a></li>
                 <!-- <li><a href="./images.html">Galerie</a></li> -->
-                <li><a href="https://laxacube.craftingstore.net/" class="ext" target="_self " >Boutique</a></li>
-                <li><a href="https://bit.ly/discord-laxacube" class="ext" target="_self " >Communauté</a></li>
+
+                <li><a href="https://laxacube.craftingstore.net/" class="ext" target="_self ">Boutique</a></li>
+                <li><a href="https://bit.ly/discord-laxacube" class="ext" target="_self ">Communauté</a></li>
             </ul>
         </nav>
     </header>
@@ -32,5 +35,17 @@
         </nav>
         <p>&copy; 2025 LaxaCube. Tous droits réservés.</p>
     </footer>
+    <script src="../src/js/chat.js"></script>
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>LaxaAssistant - AI</span>
+            <button onclick="toggleChat()">✕</button>
+        </div>
+        <iframe src="https://ia.laxacube.ch" frameborder="0"></iframe>
+    </div>
+    <div id="chat-launcher" onclick="toggleChat()">
+        <img src="https://img.icons8.com/?size=100&id=114332&format=png&color=ffffff" alt="Chat Icon">
+    </div>
 </body>
+
 </html>

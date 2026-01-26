@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../src/css/wiki.css">
     <title>Wiki | LaxaCube</title>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -20,19 +22,18 @@
                         target="_self">Launcher</a></li>
                 <li><a href="./wiki.html">Wiki</a></li>
                 <!-- <li><a href="./images.html">Galerie</a></li> -->
-                <li><a href="https://chat.laxacube.ch" class="ext" target="_self ">Aide</a></li>
 
                 <li><a href="https://laxacube.craftingstore.net/" class="ext" target="_self">Boutique</a></li>
                 <li><a href="https://bit.ly/discord-laxacube" class="ext" target="_self">Communauté</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <!-- Première Table avec filtres -->
         <h2>Liste des Commandes</h2>
         <input type="text" id="search1" placeholder="Rechercher..." class="search">
-        
+
         <!-- Filtres -->
         <select id="rank-filter1">
             <option value="">Tous les ranks</option>
@@ -42,7 +43,9 @@
         </select>
 
         <table>
-            <thead><tr id="table-head1"></tr></thead>
+            <thead>
+                <tr id="table-head1"></tr>
+            </thead>
             <tbody id="table-body1"></tbody>
         </table>
         <button id="load-more1" class="btn">Afficher plus</button>
@@ -51,7 +54,9 @@
         <h2>Ouils et spawners</h2>
         <input type="text" id="search2" placeholder="Rechercher..." class="search">
         <table>
-            <thead><tr id="table-head2"></tr></thead>
+            <thead>
+                <tr id="table-head2"></tr>
+            </thead>
             <tbody id="table-body2"></tbody>
         </table>
         <button id="load-more2" class="btn">Afficher plus</button>
@@ -68,16 +73,16 @@
         </nav>
         <p>&copy; 2025 LaxaCube. Tous droits réservés.</p>
     </footer>
-<script>
-  atOptions = {
-    'key' : 'd05cbe485f337a4ba2132904e85f260b',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/d05cbe485f337a4ba2132904e85f260b/invoke.js"></script>
+    <script>
+        atOptions = {
+            'key': 'd05cbe485f337a4ba2132904e85f260b',
+            'format': 'iframe',
+            'height': 60,
+            'width': 468,
+            'params': {}
+        };
+    </script>
+    <script src="https://www.highperformanceformat.com/d05cbe485f337a4ba2132904e85f260b/invoke.js"></script>
     <script>
         function loadCSV(csvFile, tableId, hasFilters = false) {
             let rowsData = [];
@@ -90,7 +95,7 @@
                     const rows = csvText.trim().split("\n");
                     const headers = rows.shift().split(",");
                     const tableHead = document.getElementById("table-head" + tableId);
-                    
+
                     headers.forEach(header => {
                         const th = document.createElement("th");
                         th.textContent = header;
@@ -178,7 +183,7 @@
                         } else {
                             td.textContent = value;
                         }
-                        
+
 
                         tr.appendChild(td);
                     });
@@ -199,5 +204,17 @@
         loadCSV("commande.csv", "1", true); // Première table avec filtres
         loadCSV("ajout.csv", "2", false); // Deuxième table sans filtres
     </script>
+    <script src="../src/js/chat.js"></script>
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>LaxaAssistant - AI</span>
+            <button onclick="toggleChat()">✕</button>
+        </div>
+        <iframe src="https://ia.laxacube.ch" frameborder="0"></iframe>
+    </div>
+    <div id="chat-launcher" onclick="toggleChat()">
+        <img src="https://img.icons8.com/?size=100&id=114332&format=png&color=ffffff" alt="Chat Icon">
+    </div>
 </body>
+
 </html>

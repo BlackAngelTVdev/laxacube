@@ -23,7 +23,6 @@
                         target="_self">Launcher</a></li>
                 <li><a href="./pages/wiki.html">Wiki</a></li>
                 <!-- <li><a href="./pages/images.html">Galerie</a></li> -->
-                <li><a href="https://chat.laxacube.ch" class="ext" target="_self ">Aide</a></li>
                 <li><a href="https://laxacube.craftingstore.net/" class="ext" target="_self ">Boutique</a></li>
                 <li><a href="https://bit.ly/discord-laxacube" class="ext" target="_self ">Communauté</a></li>
             </ul>
@@ -171,6 +170,19 @@
         };
     </script>
     <script src="https://www.highperformanceformat.com/d05cbe485f337a4ba2132904e85f260b/invoke.js"></script>
+
+    <script src="./src/js/chat.js"></script>
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>LaxaAssistant - AI</span>
+            <button onclick="toggleChat()">✕</button>
+        </div>
+        <iframe src="https://ia.laxacube.ch" frameborder="0"></iframe>
+    </div>
+    <div id="chat-launcher" onclick="toggleChat()">
+        <img src="https://img.icons8.com/?size=100&id=114332&format=png&color=ffffff" alt="Chat Icon">
+    </div>
+
 </body>
 
 </html>
